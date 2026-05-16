@@ -1,2 +1,143 @@
 # Coding-project
-Coding project...
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DARK TECH INDIA | Project Hub</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        body {
+            background-color: #0a0f1d;
+            color: #00ff41;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: rgba(10, 15, 29, 0.8);
+            border: 1px solid #00ff41;
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.2);
+            padding: 30px;
+            border-radius: 8px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 1px dashed #00ff41;
+            padding-bottom: 20px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 0 0 10px #00ff41;
+        }
+
+        header p {
+            color: #888;
+            margin-top: 10px;
+            font-size: 1.1rem;
+        }
+
+        .project-list {
+            list-style: none;
+        }
+
+        .project-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            margin-bottom: 15px;
+            border: 1px solid rgba(0, 255, 65, 0.4);
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            background: #0d1527;
+        }
+
+        .project-item:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 15px rgba(0, 255, 65, 0.4);
+            border-color: #00ff41;
+        }
+
+        .project-info h3 {
+            font-size: 1.2rem;
+            color: #ffffff;
+        }
+
+        .project-info p {
+            font-size: 0.9rem;
+            color: #00ff41;
+            margin-top: 5px;
+            opacity: 0.7;
+        }
+
+        .live-btn {
+            display: inline-block;
+            background: transparent;
+            color: #00ff41;
+            border: 1px solid #00ff41;
+            padding: 8px 16px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .live-btn:hover {
+            background: #00ff41;
+            color: #0a0f1d;
+            box-shadow: 0 0 10px #00ff41;
+            cursor: pointer;
+        }
+
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            color: #444;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>⚡ DARK TECH INDIA ⚡</h1>
+            <p>कुलदीप प्रजापति — मेरे सभी Projects का Live Dashboard</p>
+        </header>
+
+        <ul class="project-list">
+            
+            <li class="project-item">
+                <div class="project-info">
+                    <h3>01. Celsius to Fahrenheit Calculator</h3>
+                    <p>टूल / कनवर्टर</p>
+                </div>
+                <a class="live-btn" href="./CELSIUS TO FAHRENHEIT Calculator/">Live View 👁️</a>
+            </li>
+
+            </ul>
+
+        <footer>
+            <p>// Stay Secure. Keep Coding. //</p>
+        </footer>
+    </div>
+
+</body>
+</html>
