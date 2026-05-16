@@ -1,0 +1,122 @@
+/* बैकग्राउंड में मैट्रिक्स वाइब देने के लिए */
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle, #0a1f0a 0%, #000 100%);
+    font-family: 'Courier New', Courier, monospace;
+    overflow: hidden;
+}
+
+/* मेन ब्लर बॉक्स (Glassmorphism) */
+main {
+    height: 400px;
+    width: 350px;
+    background: rgba(255, 255, 255, 0.05);
+    /* ट्रांसपेरेंट व्हाइट */
+    backdrop-filter: blur(15px);
+    /* ब्लर इफेक्ट */
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(0, 255, 0, 0.2);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8), inset 0 0 15px rgba(0, 255, 0, 0.1);
+}
+
+.inner-div {
+    width: 80%;
+}
+
+h2 {
+    color: #0f0;
+    text-align: center;
+    font-size: 1.2rem;
+    text-shadow: 0 0 10px #0f0;
+    margin-bottom: 25px;
+}
+
+/* इनपुट स्टाइल */
+input {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    border: none;
+    border-bottom: 2px solid #055505;
+    color: #0f0;
+    padding: 12px 5px;
+    outline: none;
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: 0.4s;
+}
+
+input:focus {
+    border-bottom: 2px solid #0f0;
+    box-shadow: 0 5px 15px -5px #0f0;
+}
+
+/* Arrows हटाना */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* बटन बॉक्स */
+.button-box {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+.button {
+    background: #0f0;
+    color: #000;
+    border: none;
+    padding: 10px 20px;
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: 0.3s;
+    clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
+    /* कटा हुआ कूल शेप */
+}
+
+.button:hover {
+    background: #fff;
+    box-shadow: 0 0 20px #fff;
+    transform: scale(1.05);
+}
+
+/* आंसर दिखाने की जगह */
+.show-answer {
+    margin-top: 30px;
+    color: #0f0;
+    font-size: 1.8rem;
+    text-align: center;
+    font-weight: bold;
+    text-shadow: 0 0 15px #0f0;
+    min-height: 40px;
+}
+
+select {
+    width: 100%;
+    background: #000;
+    color: #0f0;
+    border: 1px solid #0f0;
+    padding: 10px;
+    margin: 20px;
+    font-family: monospace;
+    outline: none;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+select option {
+    background: #000;
+    color: #0f0;
+}
