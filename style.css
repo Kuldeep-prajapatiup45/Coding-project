@@ -1,0 +1,312 @@
+/* ==========================================================================
+   1. ग्लोबल और डार्क थीम स्टाइल्स
+   ========================================================================== */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #030712;
+    color: #f3f4f6;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    padding: 40px 20px;
+    box-sizing: border-box;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    margin: 0 0 10px 0;
+    letter-spacing: 2px;
+    color: #00ffff;
+    text-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+}
+
+header p {
+    color: #9ca3af;
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+/* ==========================================================================
+   2. एडवांस्ड सर्च बार और (X) बटन की स्टाइलिंग
+   ========================================================================== */
+.search-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 50px;
+}
+
+.search-box {
+    position: relative; /* ताकि इसके अंदर की चीजें absolute रह सकें */
+    width: 100%;
+    max-width: 600px;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 16px 50px 16px 20px; /* राइट साइड में 50px स्पेस दिया ताकि X बटन अंदर बैठ सके */
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(0, 255, 255, 0.2);
+    border-radius: 30px;
+    color: #fff;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.search-box input:focus {
+    border-color: #00ffff;
+    box-shadow: 0 0 25px rgba(0, 255, 255, 0.25);
+    background: rgba(0, 0, 0, 0.5);
+}
+
+/* 🎯 (X) बटन की जादुई स्टाइलिंग */
+.clear-btn {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    color: #4b5563;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: color 0.2s;
+    display: none; /* शुरुआत में छिपा रहेगा, टाइप करने पर JS से दिखाएंगे */
+}
+
+.clear-btn:hover {
+    color: #ff3333; /* होवर करने पर डेंजर रेड कलर */
+}
+
+/* ==========================================================================
+   3. सर्च हिस्ट्री ड्रॉपडाउन
+   ========================================================================== */
+.history-hidden {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: #111827;
+    border: 1px solid #374151;
+    border-radius: 15px;
+    margin-top: 8px;
+    z-index: 100; /* ताकि प्रोडक्ट्स के ऊपर तैरता हुआ दिखे */
+    padding: 8px 0;
+    max-height: 250px;
+    overflow-y: auto; /* ज्यादा हिस्ट्री होने पर स्क्रॉल बार आ जाएगा */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+}
+
+.history-item {
+    padding: 12px 20px;
+    cursor: pointer;
+    color: #d1d5db;
+    display: flex;
+    align-items: center;
+    transition: background 0.2s, color 0.2s;
+}
+
+.history-item:hover {
+    color: #00ffff;
+    background: rgba(0, 255, 255, 0.05);
+}
+
+/* ==========================================================================
+   4. प्रोडक्ट ग्रिड और कार्ड्स
+   ========================================================================== */
+#product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 30px;
+    width: 100%;
+}
+
+.product-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+}
+
+.product-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(0, 255, 255, 0.4);
+    box-shadow: 0 10px 30px rgba(0, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.product-image {
+    width: 100%;
+    height: 200px;
+    background: #111827;
+    border-radius: 12px;
+    object-fit: cover;
+    margin-bottom: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.product-category {
+    align-self: flex-start;
+    background: rgba(0, 255, 255, 0.1);
+    color: #00ffff;
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+.product-name {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 0 0 10px 0;
+    color: #ffffff;
+}
+
+.product-price {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #38bdf8;
+    margin-top: auto;
+}
+
+.buy-btn {
+    margin-top: 15px;
+    padding: 12px;
+    background: transparent;
+    border: 1px solid #00ffff;
+    color: #00ffff;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.buy-btn:hover {
+    background: #00ffff;
+    color: #000;
+    box-shadow: 0 0 15px #00ffff;
+}
+
+/* ==========================================================================
+   5. 🚨 जादुई 'View Details' पॉपअप (Modal CSS) 🚨
+   ========================================================================== */
+.modal-hidden {
+    display: none; /* शुरू में गायब */
+    position: fixed; /* पूरी स्क्रीन पर लॉक करने के लिए */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(3, 7, 18, 0.85); /* पीछे का बैकग्राउंड धुंधला और डार्क */
+    backdrop-filter: blur(8px);
+    z-index: 9999; /* सबसे ऊपर चमकेगा */
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* पॉपअप का असली सफेद/डार्क बॉक्स */
+.modal-content {
+    background: #111827;
+    border: 1px solid rgba(0, 255, 255, 0.3);
+    border-radius: 24px;
+    width: 100%;
+    max-width: 700px;
+    padding: 30px;
+    position: relative;
+    box-shadow: 0 20px 50px rgba(0, 255, 255, 0.15);
+    animation: popupAnimation 0.3s ease-out; /* खुलने का स्मूथ इफ़ेक्ट */
+}
+
+@keyframes popupAnimation {
+    from { transform: scale(0.9); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+/* पॉपअप बंद करने का क्लोज बटन */
+.close-modal-btn {
+    position: absolute;
+    right: 25px;
+    top: 20px;
+    font-size: 2rem;
+    color: #9ca3af;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.close-modal-btn:hover {
+    color: #00ffff;
+}
+
+/* मोडल के अंदर का डिज़ाइन (फोटो लेफ्ट, डिटेल्स राइट) */
+.modal-body {
+    display: flex;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.modal-img-container {
+    flex: 1;
+}
+
+.modal-img-container img {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.modal-info {
+    flex: 1.2;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-info h2 {
+    margin: 10px 0;
+    font-size: 1.8rem;
+    color: #fff;
+}
+
+.product-desc {
+    color: #9ca3af;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 15px 0;
+}
+
+/* छोटे मोबाइल स्क्रीन के लिए रिस्पॉन्सिव */
+@media (max-width: 600px) {
+    .modal-body {
+        flex-direction: column;
+    }
+    .modal-img-container img {
+        height: 200px;
+    }
+}
