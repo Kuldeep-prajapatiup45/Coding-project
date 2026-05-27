@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Clock & Background Changer</title>
+    <style>
+        body {
+            display: flex;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+            font-family: sans-serif;
+        }
+
+        /* div h1 {
+            /* background: black;
+            color: white;
+        } */
+    </style>
+</head>
+
+<body>
+    <div class="clock-box">
+        <h1 class="showTime">---</h1>
+        <button>Change Background</button>
+    </div>
+    <script>
+        // time 
+        const showTime = document.querySelector(".showTime");
+        let updateTime = () => {
+            const nowTime = new Date();
+            let finalTime = showTime.innerHTML = nowTime.toLocaleTimeString();
+        }
+
+        setInterval(updateTime , 1000);
+        updateTime();
+
+        // background change 
+        const changeBackground = document.querySelector("body");
+        const clickBtn = document.querySelector("button");
+
+        let changeBackgroundFun = ()=>{
+            const colors = ["#2c3e50", "#34495e", "#2ecc71", "#e67e22", "#3498db"];
+            const randomColorPic = colors[Math.floor(Math.random()* colors.length)];
+            changeBackground.style.background=randomColorPic;
+        }
+
+        clickBtn.addEventListener("click",changeBackgroundFun)
+
+    </script>
+</body>
+
+</html>
