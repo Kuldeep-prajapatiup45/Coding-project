@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hacker To-Do List</title>
+    <style>
+        /* डार्क मोड बैकग्राउंड और स्मूथ स्क्रॉल */
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #020202;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #00ffff;
+            overflow: hidden;
+        }
+
+        /* 🔴 [अपडेट] मेन ब्लर साइबर कार्ड को और चौड़ा (550px) किया */
+        .todo-card {
+            background: rgba(5, 15, 15, 0.6);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            padding: 35px;
+            border-radius: 20px;
+            width: 550px;
+            /* चौड़ाई बढ़ा दी */
+            box-shadow: 0 0 40px rgba(0, 255, 255, 0.15), inset 0 0 20px rgba(0, 255, 255, 0.05);
+            box-sizing: border-box;
+        }
+
+        h2 {
+            margin-top: 0;
+            margin-bottom: 25px;
+            text-align: center;
+            letter-spacing: 4px;
+            text-shadow: 0 0 15px #00ffff;
+            font-weight: 800;
+        }
+
+        /* इनपुट और बटन का परफेक्ट अलाइनमेंट */
+        .input-group {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        input {
+            flex: 1;
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid #005555;
+            padding: 14px;
+            color: #00ffff;
+            outline: none;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: 0.3s;
+            letter-spacing: 0.5px;
+        }
+
+        input:focus {
+            border-color: #00ffff;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+        }
+
+        /* ADD बटन का नियॉन लुक */
+        #add-btn {
+            padding: 14px 28px;
+            background: #00ffff;
+            color: #000;
+            border: none;
+            font-weight: 900;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: 0.3s;
+            letter-spacing: 1px;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+        }
+
+        #add-btn:hover {
+            background: #fff;
+            box-shadow: 0 0 20px #00ffff;
+            transform: translateY(-1px);
+        }
+
+        /* लिस्ट कंटेनर और स्क्रॉल बार छुपाना */
+        #todo-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            max-height: 280px;
+            overflow-y: auto;
+            scrollbar-width: none;
+            /* Firefox */
+        }
+
+        #todo-list::-webkit-scrollbar {
+            display: none;
+            /* Chrome, Safari */
+        }
+
+        /* <li> को एक परफेक्ट चौड़ी लाइन में सेट करना */
+        #todo-list li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 255, 255, 0.03);
+            border: 1px solid rgba(0, 255, 255, 0.15);
+            padding: 14px 20px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            box-sizing: border-box;
+            width: 100%;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        #todo-list li:hover {
+            background: rgba(0, 255, 255, 0.06);
+            border-color: rgba(0, 255, 255, 0.3);
+        }
+
+        /* टास्क का टेक्स्ट */
+        #todo-list li span {
+            color: #ffffff;
+            font-size: 15px;
+            letter-spacing: 0.5px;
+            word-break: break-all;
+            padding-right: 15px;
+            flex: 1;
+        }
+
+        /* डिलीट बटन का किलर लुक */
+        .delete-btn {
+            background: rgba(255, 51, 51, 0.05);
+            color: #ff3333;
+            border: 1px solid rgba(255, 51, 51, 0.4);
+            padding: 6px 14px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 800;
+            transition: 0.3s;
+            letter-spacing: 0.5px;
+            flex-shrink: 0;
+            width: auto;
+        }
+
+        .delete-btn:hover {
+            background: #ff3333;
+            color: #fff;
+            box-shadow: 0 0 15px #ff3333;
+            border-color: #ff3333;
+        }
+
+        /* एनीमेशन */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-5px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="todo-card">
+        <h2>[ TASKS_LIST ]</h2>
+
+        <div class="input-group">
+            <input type="text" id="todo-input" placeholder="Enter a new task...">
+            <button id="add-btn">ADD</button>
+        </div>
+
+        <ul id="todo-list">
+
+        </ul>
+    </div>
+
+    <script>
+        // तुम्हारा जावास्क्रिप्ट कोड (बिना किसी बदलाव के)
+        const todoInput = document.getElementById("todo-input");
+        const addBtn = document.getElementById("add-btn");
+        const todoList = document.getElementById("todo-list");
+        const deleteBtn = document.querySelector(".delete-btn");
+
+        const todoArray = JSON.parse(localStorage.getItem("todo list")) || [];
+
+        todoArray.forEach(item => {
+            let li = document.createElement("li");
+            li.innerHTML = `
+        <span>${item.taskName}</span>
+        <button class="delete-btn">Delete</button>
+    `;
+            todoList.appendChild(li);
+        });
+
+        addBtn.addEventListener("click", () => {
+
+            let todoInputs = todoInput.value.trim();
+            if (todoInputs === "") return;
+
+
+            let todoObject = {
+                taskName: todoInputs,
+                status: "pending"
+            };
+
+            todoArray.push(todoObject);
+
+            localStorage.setItem("todo list", JSON.stringify(todoArray));
+
+            todoList.innerHTML = "";
+            todoArray.forEach((item, index) => {
+                let li = document.createElement("li");
+                li.innerHTML = `
+            <span id="${index}">${item.taskName}</span>
+            <button class="delete-btn">Delete</button>
+            `;
+                todoList.appendChild(li);
+            });
+
+            todoInput.value = "";
+        });
+        todoInput.addEventListener("keydown", (e) => {
+            if (e.key === "Enter") {
+                addBtn.click(); 
+            }
+        });
+
+        todoList.addEventListener("click", (event) => {
+            if (event.target.classList.contains("delete-btn")) {
+                let spanId = event.target.previousElementSibling.id;
+                todoArray.splice(spanId, 1);
+                localStorage.setItem("todo list", JSON.stringify(todoArray));
+                event.target.parentElement.remove()
+            }
+        })
+    </script>
+</body>
+
+</html>
