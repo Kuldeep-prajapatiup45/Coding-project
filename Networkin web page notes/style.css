@@ -1,0 +1,317 @@
+/* --- 1. GLOBAL STYLES & THEME --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #05070f;
+    /* Pure Dark Tech Black */
+    color: #e0e6ed;
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #0a0f1d;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #00ff66;
+    border-radius: 3px;
+}
+
+/* --- 2. SIDEBAR (CHAPTERS NAV) --- */
+.sidebar {
+    width: 320px;
+    background-color: #0a0f1d;
+    border-right: 2px solid #00ff66;
+    padding: 20px 15px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    z-index: 10;
+}
+
+.sidebar-title {
+    font-size: 22px;
+    color: #00ff66;
+    font-weight: bold;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    text-shadow: 0 0 10px rgba(0, 255, 102, 0.3);
+    border-bottom: 1px solid rgba(0, 255, 102, 0.2);
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+.chapter-container {
+    margin-bottom: 15px;
+}
+
+.chapter-header {
+    background-color: #111936;
+    padding: 12px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+
+.chapter-header:hover {
+    border-color: #00ff66;
+    background-color: #16224f;
+}
+
+.chapter-title {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.arrow-icon {
+    font-size: 14px;
+    transition: transform 0.3s ease;
+    color: #00ff66;
+}
+
+/* Dropdown Sub-topics List */
+.subtopics-list {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    padding-left: 20px;
+    position: relative;
+}
+
+/* Connecting vertical line for subtopics */
+.subtopics-list::before {
+    content: '';
+    position: absolute;
+    left: 10px;
+    top: 0;
+    bottom: 15px;
+    width: 2px;
+    background: linear-gradient(to bottom, #00ff66, #0077ff);
+}
+
+.subtopic-item {
+    padding: 10px 12px;
+    margin: 5px 0;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.2s;
+    position: relative;
+    color: #a0aec0;
+}
+
+/* Horizontal connector branch */
+.subtopic-item::before {
+    content: '';
+    position: absolute;
+    left: -10px;
+    top: 50%;
+    width: 8px;
+    height: 2px;
+    background-color: #0077ff;
+}
+
+.subtopic-item:hover,
+.subtopic-item.active {
+    color: #ffffff;
+    background-color: #1a2654;
+    box-shadow: inset 3px 0 0 #00ff66;
+}
+
+/* Active Chapter Arrow Rotation */
+.chapter-container.open .arrow-icon {
+    transform: rotate(180deg);
+}
+
+.chapter-container.open .subtopics-list {
+    max-height: 1000px;
+    /* Big enough to hold items */
+    padding-top: 5px;
+}
+
+/* --- 3. MAIN CONTENT DISPLAY (CENTER) --- */
+.main-content {
+    flex-grow: 1;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+    position: relative;
+    padding-bottom: 160px;
+    /* Space for bottom navigation */
+}
+
+.display-card {
+    width: 100%;
+    max-width: 850px;
+    background-color: #0a0f1d;
+    border: 1px solid #1a2654;
+    border-radius: 12px;
+    padding: 35px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.topic-title {
+    color: #00ff66;
+    font-size: 28px;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #1a2654;
+    padding-bottom: 10px;
+}
+
+.topic-meta {
+    font-size: 13px;
+    color: #0077ff;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.content-section {
+    line-height: 1.7;
+    font-size: 16px;
+    margin-bottom: 25px;
+}
+
+/* Real-world Example Box */
+.example-box {
+    background: linear-gradient(135deg, #111936 0%, #0d1527 100%);
+    border-left: 4px solid #0077ff;
+    padding: 20px;
+    border-radius: 0 8px 8px 0;
+    margin-bottom: 25px;
+}
+
+.example-box h4 {
+    color: #0077ff;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Technical Practice Code/Command Block */
+.command-block {
+    background-color: #03050a;
+    border: 1px solid rgba(0, 255, 102, 0.2);
+    padding: 18px;
+    border-radius: 6px;
+    font-family: 'Courier New', Courier, monospace;
+    color: #00ff66;
+    margin-bottom: 25px;
+    position: relative;
+    overflow-x: auto;
+}
+
+.command-block::before {
+    content: 'TERMINAL';
+    position: absolute;
+    top: 2px;
+    right: 10px;
+    font-size: 10px;
+    color: #4a5568;
+}
+
+/* Conceptual Tech Diagram Placeholder */
+.concept-image-container {
+    width: 100%;
+    background-color: #111625;
+    border: 2px dashed #1a2654;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    margin-top: 25px;
+    color: #a0aec0;
+}
+
+.concept-image-mock {
+    font-family: monospace;
+    white-space: pre-wrap;
+    text-align: left;
+    display: inline-block;
+    background-color: #05070f;
+    padding: 15px;
+    border-radius: 5px;
+    color: #00ff66;
+    border: 1px solid #111936;
+    margin-top: 10px;
+    font-size: 13px;
+}
+
+/* --- 4. BOTTOM NAVIGATION ARROWS --- */
+.bottom-nav {
+    position: absolute;
+    bottom: 80px;
+    /* Custom 100px-ish gap from bottom viewport area */
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 60px;
+    pointer-events: none;
+    /* Allows scrolling behind space if needed */
+}
+
+.nav-btn {
+    width: 55px;
+    height: 55px;
+    background-color: #0a0f1d;
+    border: 2px solid #00ff66;
+    border-radius: 50%;
+    color: #00ff66;
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+    pointer-events: auto;
+    /* Re-enable pointer events for buttons */
+    box-shadow: 0 0 15px rgba(0, 255, 102, 0.2);
+}
+
+.nav-btn:hover {
+    background-color: #00ff66;
+    color: #05070f;
+    box-shadow: 0 0 25px rgba(0, 255, 102, 0.6);
+    transform: scale(1.05);
+}
+
+.nav-btn:disabled {
+    border-color: #1a2654;
+    color: #1a2654;
+    cursor: not-allowed;
+    box-shadow: none;
+    background-color: transparent;
+}
