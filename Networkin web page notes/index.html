@@ -8,20 +8,30 @@
 </head>
 <body>
 
-    <div class="sidebar">
-        <div class="sidebar-title">⚡ Cyber Security Practical Notes</div>
-        <div id="chapters-list-target">
-            </div>
+    <div class="mobile-header">
+        <button class="menu-btn" id="menu-toggle-btn" onclick="toggleSidebar(true)">☰</button>
+        <div class="mobile-logo">⚡ DARK TECH INDIA</div>
+        <div style="width: 28px;"></div> </div>
+
+    <div class="sidebar-overlay" id="sidebar-overlay" onclick="toggleSidebar(false)"></div>
+
+    <div class="sidebar" id="sidebar-nav">
+        <div class="sidebar-title">⚡ Dark Tech India</div>
+        <div id="chapters-list-target"></div>
     </div>
 
     <div class="main-content">
-        <div class="display-card" id="display-card-target">
-            </div>
+        <div class="display-card" id="display-card-target"></div>
 
         <div class="bottom-nav">
             <button class="nav-btn" id="prev-btn" onclick="navigateTopic(-1)">◁</button>
             <button class="nav-btn" id="next-btn" onclick="navigateTopic(1)">▷</button>
         </div>
+
+        <footer class="cyber-footer">
+            <p class="footer-desc">A smart JavaScript-based interactive interface designed for dynamic cyber security learning, technical command documentation, and automated step-by-step networking module walkthroughs.</p>
+            <p>&copy; 2026 <span class="footer-brand">Networking for cyber security notes</span> | Developed by Kuldeep</p>
+        </footer>
     </div>
 
 <script src="scritp.js"></script>
