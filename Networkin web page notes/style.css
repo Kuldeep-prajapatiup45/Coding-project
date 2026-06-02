@@ -1,3 +1,4 @@
+/* --- 1. GLOBAL STYLES & THEME --- */
 * {
     margin: 0;
     padding: 0;
@@ -6,26 +7,79 @@
 }
 
 body {
-    background-color: #05070f; /* Pure Dark Tech Black */
+    background-color: #05070f;
+    /* Pure Dark Tech Black */
     color: #e0e6ed;
     display: flex;
     height: 100vh;
     overflow: hidden;
+    position: relative;
 }
 
-/* Custom Styled Scrollbar */
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
     width: 6px;
 }
+
 ::-webkit-scrollbar-track {
     background: #0a0f1d;
 }
+
 ::-webkit-scrollbar-thumb {
     background: #00ff66;
     border-radius: 3px;
 }
 
-/* --- 2. SIDEBAR (CHAPTERS & DROP-DOWN NAV) --- */
+/* --- MOBILE HEADER & HAMBURGER --- */
+.mobile-header {
+    display: none;
+    /* Desktop par chhupa rahega */
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background-color: #0a0f1d;
+    border-bottom: 2px solid #00ff66;
+    padding: 0 20px;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 20;
+}
+
+.menu-btn {
+    background: none;
+    border: none;
+    color: #00ff66;
+    font-size: 28px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    text-shadow: 0 0 10px rgba(0, 255, 102, 0.4);
+}
+
+.mobile-logo {
+    font-size: 18px;
+    color: #00ff66;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+/* Sidebar Overlay for Mobile */
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 25;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* --- 2. SIDEBAR (CHAPTERS NAV) --- */
 .sidebar {
     width: 320px;
     background-color: #0a0f1d;
@@ -34,7 +88,8 @@ body {
     display: flex;
     flex-direction: column;
     overflow-y: auto;
-    z-index: 10;
+    z-index: 30;
+    transition: transform 0.3s ease;
 }
 
 .sidebar-title {
@@ -81,7 +136,7 @@ body {
     color: #00ff66;
 }
 
-/* Dropdown Sub-topics Container */
+/* Dropdown Sub-topics List */
 .subtopics-list {
     max-height: 0;
     overflow: hidden;
@@ -90,7 +145,7 @@ body {
     position: relative;
 }
 
-/* Connecting Vertical Line (Dropdown Hierarchy Tracker) */
+/* Connecting vertical line for subtopics */
 .subtopics-list::before {
     content: '';
     position: absolute;
@@ -112,7 +167,7 @@ body {
     color: #a0aec0;
 }
 
-/* Horizontal Link Branch Line */
+/* Horizontal connector branch */
 .subtopic-item::before {
     content: '';
     position: absolute;
@@ -123,23 +178,25 @@ body {
     background-color: #0077ff;
 }
 
-.subtopic-item:hover, .subtopic-item.active {
+.subtopic-item:hover,
+.subtopic-item.active {
     color: #ffffff;
     background-color: #1a2654;
     box-shadow: inset 3px 0 0 #00ff66;
 }
 
-/* Rotates the arrow indicator on opening */
+/* Active Chapter Arrow Rotation */
 .chapter-container.open .arrow-icon {
     transform: rotate(180deg);
 }
 
 .chapter-container.open .subtopics-list {
     max-height: 1000px;
+    /* Big enough to hold items */
     padding-top: 5px;
 }
 
-/* --- 3. MAIN CONTENT DISPLAY (CENTER MODULE) --- */
+/* --- 3. MAIN CONTENT DISPLAY (CENTER) --- */
 .main-content {
     flex-grow: 1;
     padding: 40px;
@@ -148,7 +205,8 @@ body {
     align-items: center;
     overflow-y: auto;
     position: relative;
-    padding-bottom: 160px; /* Safe padding for bottom interaction arrows */
+    padding-bottom: 60px;
+    /* Adjusted to fit the footer at the bottom */
 }
 
 .display-card {
@@ -158,13 +216,22 @@ body {
     border: 1px solid #1a2654;
     border-radius: 12px;
     padding: 35px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     animation: fadeIn 0.4s ease-in-out;
+    margin-bottom: 40px;
+    /* Space before nav buttons and footer */
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .topic-title {
@@ -189,7 +256,7 @@ body {
     margin-bottom: 25px;
 }
 
-/* Practical Real-world Example Container Box */
+/* Real-world Example Box */
 .example-box {
     background: linear-gradient(135deg, #111936 0%, #0d1527 100%);
     border-left: 4px solid #0077ff;
@@ -206,7 +273,7 @@ body {
     gap: 8px;
 }
 
-/* Cyber Technical Terminal Command Block */
+/* Technical Practice Code/Command Block */
 .command-block {
     background-color: #03050a;
     border: 1px solid rgba(0, 255, 102, 0.2);
@@ -228,7 +295,7 @@ body {
     color: #4a5568;
 }
 
-/* Infrastructure Architecture Layout Diagram Box */
+/* Conceptual Tech Diagram Placeholder */
 .concept-image-container {
     width: 100%;
     background-color: #111625;
@@ -254,16 +321,15 @@ body {
     font-size: 13px;
 }
 
-/* --- 4. BOTTOM NAVIGATION NAVIGATION ARROWS --- */
+/* --- 4. BOTTOM NAVIGATION ARROWS --- */
 .bottom-nav {
-    position: absolute;
-    bottom: 80px; 
-    left: 0;
-    right: 0;
     display: flex;
     justify-content: space-between;
-    padding: 0 60px;
-    pointer-events: none; 
+    width: 100%;
+    max-width: 850px;
+    padding: 0 10px;
+    margin-bottom: 50px;
+    /* Space between navigation buttons and footer */
 }
 
 .nav-btn {
@@ -279,7 +345,6 @@ body {
     justify-content: center;
     align-items: center;
     transition: all 0.3s ease;
-    pointer-events: auto; 
     box-shadow: 0 0 15px rgba(0, 255, 102, 0.2);
 }
 
@@ -298,64 +363,99 @@ body {
     background-color: transparent;
 }
 
+/* --- 4.5 CYBER FOOTER STYLES --- */
+.cyber-footer {
+    width: 100%;
+    max-width: 850px;
+    border-top: 1px solid rgba(0, 255, 102, 0.2);
+    padding: 20px 10px;
+    text-align: center;
+    font-size: 14px;
+    color: #a0aec0;
+}
 
-/* --- 📱 5. MEDIA QUERIES FOR PERFECT MOBILE RESPONSIVENESS --- */
+.footer-desc {
+    font-size: 13px;
+    color: #718096;
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
+
+.footer-brand {
+    color: #00ff66;
+    font-weight: 600;
+    text-shadow: 0 0 5px rgba(0, 255, 102, 0.2);
+}
+
+/* --- 9. MEDIA QUERIES FOR MOBILE RESPONSIVENESS --- */
 @media (max-width: 768px) {
     body {
-        flex-direction: column;
-        overflow-y: auto;
-        height: auto;
+        padding-top: 60px;
+        /* Space for fixed mobile header */
     }
 
-    /* Sidebar full-width adaptation for top docking on stack */
+    .mobile-header {
+        display: flex;
+        /* Show only on mobile */
+    }
+
     .sidebar {
-        width: 100% !important;
-        max-height: 380px; 
-        border-right: none;
-        border-bottom: 2px solid #00ff66;
-        position: relative;
+        position: fixed;
+        top: 60px;
+        left: 0;
+        bottom: 0;
+        width: 280px;
+        transform: translateX(-100%);
+        /* Hide sidebar by default */
+        border-right: 2px solid #00ff66;
+        box-shadow: 5px 0 20px rgba(0, 0, 0, 0.8);
     }
 
-    /* Main Container Padding and Alignment Adjustments */
+    /* Active class to slide-in sidebar */
+    .sidebar.active {
+        transform: translateX(0);
+    }
+
+    .sidebar-overlay.active {
+        display: block;
+        opacity: 1;
+    }
+
+    .sidebar-title {
+        display: none;
+        /* Header already handles brand title */
+    }
+
     .main-content {
-        width: 100%;
-        padding: 20px 15px 120px 15px !important;
-        overflow-y: visible;
+        padding: 20px;
+        padding-bottom: 40px;
     }
 
     .display-card {
-        padding: 20px 15px !important;
-        width: 100%;
+        padding: 20px;
+        margin-bottom: 25px;
     }
 
-    /* Downscaling text definitions to fit small mobile ports without clipping */
     .topic-title {
-        font-size: 22px !important;
+        font-size: 22px;
     }
 
-    .content-section {
-        font-size: 15px !important;
-    }
-
-    /* Preventing technical terminal blocks breaking screen boundaries */
-    .concept-image-mock {
-        font-size: 11px !important;
-        overflow-x: auto;
-        width: 100%;
-        display: block;
-    }
-
-    /* Re-anchoring the bottom arrows to be fluidly visible on viewport bases */
     .bottom-nav {
-        position: fixed;
-        bottom: 20px !important;
-        padding: 0 20px !important;
-        z-index: 99;
+        margin-bottom: 30px;
+        padding: 0;
     }
 
     .nav-btn {
-        width: 48px !important;
-        height: 48px !important;
-        font-size: 18px !important;
+        width: 45px;
+        height: 45px;
+        font-size: 18px;
+    }
+
+    .cyber-footer {
+        font-size: 12px;
+    }
+
+    .footer-desc {
+        font-size: 11px;
     }
 }
