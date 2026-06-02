@@ -1,5 +1,5 @@
 
-/* --- 5. THE CORE DATA OBJECT (यहाँ नया डेटा आसानी से ऐड कर सकते हो) --- */
+/* --- 5. THE CORE DATA OBJECT --- */
 const chaptersData = [
     {
         id: "ch1",
@@ -12,7 +12,7 @@ const chaptersData = [
                 example: "🌍 Real-world Example: Maan lo tum browser me Google open karte ho. Tumhara computer ek packet banta hai jisme tumhara IP (Source) aur Google ka IP (Destination) hota hai. Router is address ko dekhkar request sahi server tak pahunchata hai.",
                 command: "// Apni Machine ka IP check karne ke liye command:\n$ ipconfig  # (Windows ke liye)\n$ ifconfig  # (Linux/Mac ke liye)",
                 diagramTitle: "[Image: IP Packet Routing Interaction]",
-                diagramMock: "+-----------------+    Request Packet     +-----------------+\n|  Your Computer  | --------------------> |  Google Server  |\n|  192.168.1.10   | <-------------------- |  142.250.190.46 |\n+-----------------+     Response Data     +-----------------+"
+                diagramMock: "+-----------------+    Request Packet     +-----------------+\n|  Your Computer  | --------------------> |  Google Server  |\n|  192.168.1.10   | <-------------------- |  142.250.190.46 |\n+-----------------+      Response Data     +-----------------+"
             },
             {
                 id: "ipv4_structure",
@@ -39,7 +39,7 @@ const chaptersData = [
                 example: "🔄 Real-world Example: Jaise hi tum kisi cafe ke Wi-Fi se connect hote ho, tumhara phone DHCP Server ko request bhejta hai aur server bina kisi human help ke ek khali IP tumhare device ko 'Lease Time' (kuch ghanto) ke liye de deta hai.",
                 command: "# Linux par naya IP lease lene ke liye DHCP client command:\n$ sudo dhclient -r  # Purana IP release karne ke liye\n$ sudo dhclient     # Naya fresh dynamic IP assign karne ke liye",
                 diagramTitle: "[Image: DHCP 4-Step DORA Process Interaction]",
-                diagramMock: "Client Device                                 DHCP Server\n    | ------- Discover (Mujhe IP chahiye) -------> |\n    | <------ Offer (Ye wala IP le lo) ----------- |\n    | ------- Request (Theek hai, lock kar do) --> |\n    | <------ Acknowledge (Done! IP tumhara hua) - |"
+                diagramMock: "Client Device                                   DHCP Server\n    | ------- Discover (Mujhe IP chahiye) -------> |\n    | <------ Offer (Ye wala IP le lo) ----------- |\n    | ------- Request (Theek hai, lock kar do) --> |\n    | <------ Acknowledge (Done! IP tumhara हुआ) - |"
             },
             {
                 id: "nat_translation",
@@ -75,7 +75,7 @@ const chaptersData = [
                 example: "🤝 Real-world Example: \n1. Client bolta hai: 'Hello Server, kya hum connect ho sakte hain? (SYN)'\n2. Server bolta hai: 'Haan bilkul, mujhe tumhari request mil gayi, kya tum taiyar ho? (SYN+ACK)'\n3. Client bolta hai: 'Haan mai taiyar hu, chalo shuru karte hain! (ACK)'",
                 command: "# WireShark tool me filters laga kar tum in live flags ko dekh sakte ho:\nFilter: tcp.flags.syn == 1 or tcp.flags.ack == 1",
                 diagramTitle: "[Image: Detailed TCP Handshake Flag Exchange Sequence]",
-                diagramMock: "  Client                                   Server\n    | ---------- SYN (Seq=0) -------------> |\n    | <--------- SYN + ACK (Seq=0, Ack=1) - |\n    | ---------- ACK (Seq=1, Ack=1) ------> |\n    [ CONNECTION ESTABLISHED STATE ]"
+                diagramMock: "  Client                                     Server\n    | ---------- SYN (Seq=0) -------------> |\n    | <--------- SYN + ACK (Seq=0, Ack=1) - |\n    | ---------- ACK (Seq=1, Ack=1) ------> |\n    [ CONNECTION ESTABLISHED STATE ]"
             },
             {
                 id: "osi_7_layers",
@@ -109,6 +109,19 @@ function updateFlatList() {
     });
 }
 
+/* --- 6.5 MOBILE NAVIGATION HELPER --- */
+function toggleSidebar(open) {
+    const sidebar = document.getElementById('sidebar-nav');
+    const overlay = document.getElementById('sidebar-overlay');
+    if (open) {
+        sidebar.classList.add('active');
+        overlay.classList.add('active');
+    } else {
+        sidebar.classList.remove('active');
+        overlay.classList.remove('active');
+    }
+}
+
 /* --- 7. RENDER FUNCTIONS --- */
 
 // Render left sidebar layout according to rules
@@ -131,7 +144,7 @@ function renderSidebar() {
 
         const arrow = document.createElement('span');
         arrow.className = 'arrow-icon';
-        arrow.innerText = '▼'; // Down arrow showing open/close state
+        arrow.innerText = '▼';
 
         header.appendChild(title);
         header.appendChild(arrow);
@@ -145,8 +158,9 @@ function renderSidebar() {
             item.className = `subtopic-item ${(chIdx === currentChapterIndex && subIdx === currentSubtopicIndex) ? 'active' : ''}`;
             item.innerText = subtopic.title;
             item.onclick = (e) => {
-                e.stopPropagation(); // Stop parent click triggers
+                e.stopPropagation();
                 loadContent(chIdx, subIdx);
+                toggleSidebar(false); // Mobile: Close sidebar after selection
             };
             subtopicsList.appendChild(item);
         });
@@ -161,39 +175,37 @@ function loadContent(chIdx, subIdx) {
     currentChapterIndex = chIdx;
     currentSubtopicIndex = subIdx;
 
-    // Update active state in UI list items
     const allItems = document.querySelectorAll('.subtopic-item');
     allItems.forEach(i => i.classList.remove('active'));
 
-    renderSidebar(); // Rerender to handle lines and highlights
+    renderSidebar();
 
     const topicData = chaptersData[chIdx].subtopics[subIdx];
     const target = document.getElementById('display-card-target');
 
     target.innerHTML = `
-    <div class="topic-meta">${chaptersData[chIdx].title}</div>
-    <h2 class="topic-title">${topicData.title}</h2>
+                <div class="topic-meta">${chaptersData[chIdx].title}</div>
+                <h2 class="topic-title">${topicData.title}</h2>
+                
+                <div class="content-section">
+                    <p>${topicData.intro}</p>
+                </div>
 
-    <div class="content-section">
-        <p>${topicData.intro}</p>
-    </div>
+                <div class="example-box">
+                    <h4>💡 Live Concept Explanation</h4>
+                    <p>${topicData.example}</p>
+                </div>
 
-    <div class="example-box">
-        <h4>💡 Live Concept Explanation</h4>
-        <p>${topicData.example}</p>
-    </div>
+                <div class="command-block">
+                    ${topicData.command.replace(/\n/g, '<br>')}
+                </div>
 
-    <div class="command-block">
-        ${topicData.command.replace(/\n/g, '<br>')}
-    </div>
+                <div class="concept-image-container">
+                    <strong>📊 ${topicData.diagramTitle}</strong><br>
+                    <div class="concept-image-mock">${topicData.diagramMock}</div>
+                </div>
+            `;
 
-    <div class="concept-image-container">
-        <strong>📊 ${topicData.diagramTitle}</strong><br>
-            <div class="concept-image-mock">${topicData.diagramMock}</div>
-    </div>
-    `;
-
-    // Handle bottom arrows state activation/deactivation
     updateArrowButtons();
 }
 
@@ -202,7 +214,6 @@ function toggleChapter(chIdx) {
     container.classList.toggle('open');
 }
 
-// Logic for handling next/prev slide steps smoothly across multiple chapters
 function updateArrowButtons() {
     const currentFlatIndex = flatTopicsList.findIndex(
         t => t.chapterIdx === currentChapterIndex && t.subtopicIdx === currentSubtopicIndex
@@ -229,5 +240,5 @@ function navigateTopic(direction) {
 /* --- 8. INITIALIZATION ON LOAD --- */
 window.onload = () => {
     updateFlatList();
-    loadContent(0, 0); // Open first topic by default
+    loadContent(0, 0);
 };
