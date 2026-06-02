@@ -315,3 +315,64 @@ body {
     box-shadow: none;
     background-color: transparent;
 }
+
+/* ========================================================
+   📱 MOBILE & TABLET RESPONSIVE REPAIR (ONLY CSS PATCH)
+   ======================================================== */
+@media (max-width: 768px) {
+
+    body {
+        flex-direction: column;
+        overflow-y: auto;
+        height: auto;
+    }
+
+    .sidebar {
+        width: 100% !important;
+        max-height: 400px;
+        border-right: none;
+        border-bottom: 2px solid #00ff66;
+        position: relative;
+    }
+
+    .main-content {
+        width: 100%;
+        padding: 20px 15px 120px 15px !important; 
+        overflow-y: visible;
+    }
+
+    .display-card {
+        padding: 20px 15px !important;
+        width: 100%;
+    }
+
+    .topic-title {
+        font-size: 22px !important;
+    }
+
+    .content-section {
+        font-size: 15px !important;
+    }
+
+
+    .concept-image-mock {
+        font-size: 11px !important;
+        overflow-x: auto;
+        width: 100%;
+        display: block;
+    }
+
+    
+    .bottom-nav {
+        position: fixed; 
+        bottom: 20px !important;
+        padding: 0 20px !important;
+        z-index: 99;
+    }
+
+    .nav-btn {
+        width: 48px !important;
+        height: 48px !important;
+        font-size: 18px !important;
+    }
+}
