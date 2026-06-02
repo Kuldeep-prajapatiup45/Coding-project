@@ -1,4 +1,3 @@
-/* --- 1. GLOBAL STYLES & THEME --- */
 * {
     margin: 0;
     padding: 0;
@@ -7,29 +6,26 @@
 }
 
 body {
-    background-color: #05070f;
-    /* Pure Dark Tech Black */
+    background-color: #05070f; /* Pure Dark Tech Black */
     color: #e0e6ed;
     display: flex;
     height: 100vh;
     overflow: hidden;
 }
 
-/* Custom Scrollbar */
+/* Custom Styled Scrollbar */
 ::-webkit-scrollbar {
     width: 6px;
 }
-
 ::-webkit-scrollbar-track {
     background: #0a0f1d;
 }
-
 ::-webkit-scrollbar-thumb {
     background: #00ff66;
     border-radius: 3px;
 }
 
-/* --- 2. SIDEBAR (CHAPTERS NAV) --- */
+/* --- 2. SIDEBAR (CHAPTERS & DROP-DOWN NAV) --- */
 .sidebar {
     width: 320px;
     background-color: #0a0f1d;
@@ -51,7 +47,6 @@ body {
     text-shadow: 0 0 10px rgba(0, 255, 102, 0.3);
     border-bottom: 1px solid rgba(0, 255, 102, 0.2);
     padding-bottom: 10px;
-    text-align: center;
 }
 
 .chapter-container {
@@ -86,7 +81,7 @@ body {
     color: #00ff66;
 }
 
-/* Dropdown Sub-topics List */
+/* Dropdown Sub-topics Container */
 .subtopics-list {
     max-height: 0;
     overflow: hidden;
@@ -95,7 +90,7 @@ body {
     position: relative;
 }
 
-/* Connecting vertical line for subtopics */
+/* Connecting Vertical Line (Dropdown Hierarchy Tracker) */
 .subtopics-list::before {
     content: '';
     position: absolute;
@@ -117,7 +112,7 @@ body {
     color: #a0aec0;
 }
 
-/* Horizontal connector branch */
+/* Horizontal Link Branch Line */
 .subtopic-item::before {
     content: '';
     position: absolute;
@@ -128,25 +123,23 @@ body {
     background-color: #0077ff;
 }
 
-.subtopic-item:hover,
-.subtopic-item.active {
+.subtopic-item:hover, .subtopic-item.active {
     color: #ffffff;
     background-color: #1a2654;
     box-shadow: inset 3px 0 0 #00ff66;
 }
 
-/* Active Chapter Arrow Rotation */
+/* Rotates the arrow indicator on opening */
 .chapter-container.open .arrow-icon {
     transform: rotate(180deg);
 }
 
 .chapter-container.open .subtopics-list {
     max-height: 1000px;
-    /* Big enough to hold items */
     padding-top: 5px;
 }
 
-/* --- 3. MAIN CONTENT DISPLAY (CENTER) --- */
+/* --- 3. MAIN CONTENT DISPLAY (CENTER MODULE) --- */
 .main-content {
     flex-grow: 1;
     padding: 40px;
@@ -155,8 +148,7 @@ body {
     align-items: center;
     overflow-y: auto;
     position: relative;
-    padding-bottom: 160px;
-    /* Space for bottom navigation */
+    padding-bottom: 160px; /* Safe padding for bottom interaction arrows */
 }
 
 .display-card {
@@ -166,20 +158,13 @@ body {
     border: 1px solid #1a2654;
     border-radius: 12px;
     padding: 35px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     animation: fadeIn 0.4s ease-in-out;
 }
 
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 .topic-title {
@@ -204,7 +189,7 @@ body {
     margin-bottom: 25px;
 }
 
-/* Real-world Example Box */
+/* Practical Real-world Example Container Box */
 .example-box {
     background: linear-gradient(135deg, #111936 0%, #0d1527 100%);
     border-left: 4px solid #0077ff;
@@ -221,7 +206,7 @@ body {
     gap: 8px;
 }
 
-/* Technical Practice Code/Command Block */
+/* Cyber Technical Terminal Command Block */
 .command-block {
     background-color: #03050a;
     border: 1px solid rgba(0, 255, 102, 0.2);
@@ -243,7 +228,7 @@ body {
     color: #4a5568;
 }
 
-/* Conceptual Tech Diagram Placeholder */
+/* Infrastructure Architecture Layout Diagram Box */
 .concept-image-container {
     width: 100%;
     background-color: #111625;
@@ -269,18 +254,16 @@ body {
     font-size: 13px;
 }
 
-/* --- 4. BOTTOM NAVIGATION ARROWS --- */
+/* --- 4. BOTTOM NAVIGATION NAVIGATION ARROWS --- */
 .bottom-nav {
     position: absolute;
-    bottom: 80px;
-    /* Custom 100px-ish gap from bottom viewport area */
+    bottom: 80px; 
     left: 0;
     right: 0;
     display: flex;
     justify-content: space-between;
     padding: 0 60px;
-    pointer-events: none;
-    /* Allows scrolling behind space if needed */
+    pointer-events: none; 
 }
 
 .nav-btn {
@@ -296,8 +279,7 @@ body {
     justify-content: center;
     align-items: center;
     transition: all 0.3s ease;
-    pointer-events: auto;
-    /* Re-enable pointer events for buttons */
+    pointer-events: auto; 
     box-shadow: 0 0 15px rgba(0, 255, 102, 0.2);
 }
 
@@ -316,28 +298,28 @@ body {
     background-color: transparent;
 }
 
-/* ========================================================
-   📱 MOBILE & TABLET RESPONSIVE REPAIR (ONLY CSS PATCH)
-   ======================================================== */
-@media (max-width: 768px) {
 
+/* --- 📱 5. MEDIA QUERIES FOR PERFECT MOBILE RESPONSIVENESS --- */
+@media (max-width: 768px) {
     body {
         flex-direction: column;
         overflow-y: auto;
         height: auto;
     }
 
+    /* Sidebar full-width adaptation for top docking on stack */
     .sidebar {
         width: 100% !important;
-        max-height: 400px;
+        max-height: 380px; 
         border-right: none;
         border-bottom: 2px solid #00ff66;
         position: relative;
     }
 
+    /* Main Container Padding and Alignment Adjustments */
     .main-content {
         width: 100%;
-        padding: 20px 15px 120px 15px !important; 
+        padding: 20px 15px 120px 15px !important;
         overflow-y: visible;
     }
 
@@ -346,6 +328,7 @@ body {
         width: 100%;
     }
 
+    /* Downscaling text definitions to fit small mobile ports without clipping */
     .topic-title {
         font-size: 22px !important;
     }
@@ -354,7 +337,7 @@ body {
         font-size: 15px !important;
     }
 
-
+    /* Preventing technical terminal blocks breaking screen boundaries */
     .concept-image-mock {
         font-size: 11px !important;
         overflow-x: auto;
@@ -362,9 +345,9 @@ body {
         display: block;
     }
 
-    
+    /* Re-anchoring the bottom arrows to be fluidly visible on viewport bases */
     .bottom-nav {
-        position: fixed; 
+        position: fixed;
         bottom: 20px !important;
         padding: 0 20px !important;
         z-index: 99;
