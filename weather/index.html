@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="hi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Dark Weather App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="page-wrapper">
+
+        <main class="weather-container">
+
+            <h1 class="app-title">Sky<span>Forecast</span></h1>
+
+            <div class="weather-card">
+                <div class="glow-effect"></div>
+
+                <div class="search-box">
+                    <input type="text" id="city-input" placeholder="Search city name...">
+                    <button id="search-btn" title="Execute Search">FIND</button>
+                </div>
+
+                <div class="card-header">
+                    <div class="header-left">
+                        <div class="location">
+                            <div class="node-indicator"></div>
+                            <span id="location-name">Awaiting Input...</span>
+                        </div>
+
+                        <div class="cyber-time" id="cyber-timestamp">
+                            Local Time: Loading...
+                        </div>
+                    </div>
+                    <div class="live-badge" id="status-badge">ONLINE</div>
+                </div>
+
+                <div class="weather-main">
+                    <div id="weather-icon-container" class="weather-animation">
+                        <div class="custom-icon-placeholder"></div>
+                    </div>
+                    <div class="temp-box">
+                        <h1 class="temperature" id="main-temp">--°C</h1>
+                        <p class="condition" id="weather-desc">System Ready</p>
+                    </div>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-label">HUMIDITY</span>
+                        <span class="stat-value" id="humidity-val">--%</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">WIND SPEED</span>
+                        <span class="stat-value" id="wind-val">-- km/h</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">PRESSURE</span>
+                        <span class="stat-value" id="pressure-val">-- hPa</span>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+        <footer class="cyber-footer">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <span class="bracket">[</span> <span class="logo-text">Premium Weather App</span> <span
+                        class="bracket">]</span>
+                </div>
+                <div class="footer-credits">
+                    <p>&copy; 2026 // Insta-i'd --> @Kuldeep_prajapaitup45  </p>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+    
+</body>
+
+</html>
