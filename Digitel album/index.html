@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="hi" id="htmlRoot">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>सुनहरी यादें - Secure Album</title>
+  <script src="config.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- 📱 रोटेट फ़ोन स्क्रीन (जब फ़ोन सीधा पकड़ा हो) -->
+  <div id="rotateOverlay">
+    <div class="phone-icon">📱</div>
+    <h2 data-i18n="rotateTitle">फ़ोन को घुमाएं 🔄</h2>
+    <p data-i18n="rotateMsg">इस एल्बम का असली मज़ा चौड़ी स्क्रीन (Landscape Mode) में है!</p>
+  </div>
+
+  <audio id="bgMusic" loop></audio>
+
+  <div id="loadingScreen">✨ यादें ताज़ा हो रही हैं... कृपया प्रतीक्षा करें ⏳</div>
+
+  <div id="setupScreen" class="auth-box">
+    <h2 data-i18n="setupTitle">सुरक्षा कवच लगाएँ 🛡️</h2>
+    <input type="password" id="newPassInput" class="auth-input" data-i18n-ph="passPh" placeholder="अपना नया पासवर्ड सोचें..."><br>
+    <button class="auth-btn" onclick="setupPassword()" data-i18n="saveBtn">ताला लगाएँ 🔒</button>
+    <div id="setupMsg" class="msg-text"></div>
+  </div>
+
+  <div id="loginScreen" class="auth-box">
+    <h2 data-i18n="loginTitle">आपकी सुनहरी यादें 💖</h2>
+    <input type="password" id="loginPassInput" class="auth-input" data-i18n-ph="passPh" placeholder="अपनी चाबी (पासवर्ड) डालें..."><br>
+    <button class="auth-btn" onclick="login()" data-i18n="openBtn">तिजोरी खोलें ✨</button>
+    <span class="link-text" onclick="showChangeScreen()" data-i18n="changeLink">क्या चाबी (पासवर्ड) बदलनी है?</span>
+    <div id="loginMsg" class="msg-text"></div>
+  </div>
+
+  <div id="changeScreen" class="auth-box">
+    <h2 data-i18n="changeTitle">नई चाबी (पासवर्ड) बनाएं 🔄</h2>
+    <input type="password" id="oldPassInput" class="auth-input" data-i18n-ph="oldPassPh" placeholder="पुरानी चाबी डालें..."><br>
+    <input type="password" id="newChangePassInput" class="auth-input" data-i18n-ph="newPassPh" placeholder="नई मजबूत चाबी..."><br>
+    <button class="auth-btn" onclick="changePassword()" data-i18n="updateBtn">बदल दें ✅</button>
+    <span class="link-text" onclick="showLoginScreen()" data-i18n="backLink">पीछे लौटें 🔙</span>
+    <div id="changeMsg" class="msg-text"></div>
+  </div>
+
+  <!-- 🎛️ Navbar (हैमबर्गर के साथ) -->
+  <div id="topNav" class="top-nav">
+    <div class="nav-logo">✨ डिजिटल संदूक</div>
+    <!-- 👈 हैमबर्गर बटन (मोबाइल के लिए) -->
+    <div class="hamburger" id="hamburgerBtn">☰</div>
+    
+    <div class="nav-actions" id="navActions">
+      <input type="file" id="musicInput" accept="audio/*" style="display: none;">
+      <button class="nav-btn highlight-btn" id="uploadMusicBtn" data-i18n="uploadBtn">🎵 अपना पसंदीदा गाना जोड़ें</button>
+      <button class="remove-music-btn" id="removeMusicBtn" title="गाना हटाएं">❌ गाना हटाएं</button>
+      <button class="nav-btn" id="playPauseBtn" style="display: none;">▶ प्यारा सा म्यूजिक चलाएं</button>
+      <button class="nav-btn" id="autoPlayBtn" data-i18n="autoPlayBtn">⏳ अपने-आप पन्ने पलटें</button>
+      <button class="nav-btn" id="fullscreenBtn" data-i18n="fsBtn">⛶ फुल स्क्रीन (सिनेमा मोड)</button>
+      <button class="nav-btn" id="langBtn" onclick="toggleLanguage()">🌐 EN / HI</button>
+      <button class="nav-btn" id="lockBtn" data-i18n="lockBtn">🔒 वापस ताला लगाएँ</button>
+    </div>
+  </div>
+
+  <!-- 📖 एल्बम -->
+  <div class="book-container" id="bookContainer" onclick="turnPage(event)">
+    <div class="book" id="myBook">
+      <div class="face back-cover"></div>
+      <div class="permanent-last-page">
+        <div class="wooden-frame"><img id="lastPageImg" src="" class="album-img"></div>
+      </div>
+      <div class="face spine"></div>
+      <div class="face pages-right"></div>
+      <div class="face pages-front"></div>
+      <div class="face front-cover flippable" id="cover" style="z-index: 100;">
+        <div class="cover-outer">
+          <div class="groove"></div>
+          <h1 data-i18n="albumCover">सुनहरी<br>यादें ✨</h1>
+        </div>
+        <div class="cover-inner">
+          <div class="wooden-frame"><img id="firstPageImg" src="" class="album-img"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="topTriggerArea">
+    <div id="exitFullscreenBtn" data-i18n="exitFs">❌ फुल स्क्रीन से बाहर आएं</div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
